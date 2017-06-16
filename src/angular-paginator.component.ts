@@ -1,22 +1,22 @@
 import {Component, Input, SimpleChange, OnChanges, Optional} from '@angular/core';
-import {NG2DataTable, PageEvent} from './NG2DataTable';
+import {AngularDatatableDirective, PageEvent} from './AngularDatatable';
 
 @Component({
-    selector: 'mfPaginator',
+    selector: 'angular-paginator',
     template: `<ng-content></ng-content>`
 })
-export class NG2Paginator implements OnChanges {
+export class AngularPaginatorComponent implements OnChanges {
 
-    @Input('mfTable') inputMfTable: NG2DataTable;
+    @Input('mfTable') inputMfTable: AngularDatatableDirective;
 
-    private mfTable: NG2DataTable;
+    private mfTable: AngularDatatableDirective;
 
     public activePage: number;
     public rowsOnPage: number;
     public dataLength = 0;
     public lastPage: number;
 
-    public constructor(@Optional() private injectMfTable: NG2DataTable) {
+    public constructor(@Optional() private injectMfTable: AngularDatatableDirective) {
     }
 
     public ngOnChanges(changes: {[key: string]: SimpleChange}): any {

@@ -1,11 +1,11 @@
 import {Component, Input, OnChanges} from '@angular/core';
-import {NG2DataTable} from './NG2DataTable';
+import {AngularDatatableDirective} from './AngularDatatable';
 import * as _ from 'lodash';
 
 @Component({
-    selector: 'mfBootstrapPaginator',
+    selector: 'angular-bootstrap-paginator',
     template: `
-    <mfPaginator #p [mfTable]="mfTable">
+    <angular-paginator #p [mfTable]="mfTable">
         <ul class="pagination" *ngIf="p.dataLength > p.rowsOnPage">
             <li class="page-item" [class.disabled]="p.activePage <= 1" (click)="p.setPage(1)">
                 <a class="page-link" style="cursor: pointer">&laquo;</a>
@@ -46,12 +46,12 @@ import * as _ from 'lodash';
                 <a class="page-link" style="cursor: pointer">{{rows}}</a>
             </li>
         </ul>
-    </mfPaginator>
+    </angular-paginator>
     `
 })
-export class NG2BootstrapPaginator implements OnChanges {
+export class AngularBootstrapPaginatorComponent implements OnChanges {
     @Input('rowsOnPageSet') rowsOnPageSet = [];
-    @Input('mfTable') mfTable: NG2DataTable;
+    @Input('mfTable') mfTable: AngularDatatableDirective;
 
     minRowsOnPage = 0;
 

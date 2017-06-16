@@ -1,10 +1,10 @@
 {
   "name": "angular-datatable-pagination",
-  "description": "Datatable component for Angular2 framework",
+  "description": "Datatable component for angular2+",
   "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/username/repo"
+    "url": "https://github.com/Lautre3091/angular-datatable-pagination"
   },
   "author": {
     "name": "Gweltaz GESTIN",
@@ -23,7 +23,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/username/repo/issues"
+    "url": "https://github.com/Lautre3091/angular-datatable-pagination/issues"
   },
   "module": "angular-datatable-pagination.js",
   "typings": "angular-datatable-pagination.d.ts",

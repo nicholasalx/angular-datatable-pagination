@@ -1,6 +1,6 @@
 # angular-datatable-pagination
 fork from [angular2-datatable-pagination](https://github.com/Ants24/angular2-datatable-pagination), server pagination and client pagination
-
+Generated with [generator-angular2-library](https://github.com/jvandemo/generator-angular2-library)
 
 [![npm version](https://badge.fury.io/js/angular2-datatable-pagination.svg)](https://badge.fury.io/js/"angular2-datatable-pagination)
 [![Build Status](https://travis-ci.org/ants24/angular2-datatable-pagination.svg?branch=master)](https://travis-ci.org/ants24/angular2-datatable-pagination)

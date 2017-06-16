@@ -1,14 +1,12 @@
-import {SimpleChange, Component} from '@angular/core';
+import { SimpleChange } from '@angular/core';
+import {} from 'jasmine';
+import {TestComponent} from './test.component'
 import {NG2DataTable, PageEvent, SortEvent} from './NG2DataTable';
 import {TestBed, ComponentFixture} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
 import * as _ from 'lodash';
 
-@Component({
-    template: `<table [mfData]="[]"></table>`
-})
-class TestComponent {
-}
+
 
 describe('DataTable directive tests', () => {
     let datatable: NG2DataTable;

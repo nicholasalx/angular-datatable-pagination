@@ -1,9 +1,9 @@
-import {Component, Input, OnChanges} from "@angular/core";
-import {NG2DataTable} from "./NG2DataTable";
-import * as _ from "lodash";
+import {Component, Input, OnChanges} from '@angular/core';
+import {NG2DataTable} from './NG2DataTable';
+import * as _ from 'lodash';
 
 @Component({
-    selector: "mfBootstrapPaginator",
+    selector: 'mfBootstrapPaginator',
     template: `
     <mfPaginator #p [mfTable]="mfTable">
         <ul class="pagination" *ngIf="p.dataLength > p.rowsOnPage">
@@ -50,14 +50,14 @@ import * as _ from "lodash";
     `
 })
 export class NG2BootstrapPaginator implements OnChanges {
-    @Input("rowsOnPageSet") rowsOnPageSet = [];
-    @Input("mfTable") mfTable: NG2DataTable;
+    @Input('rowsOnPageSet') rowsOnPageSet = [];
+    @Input('mfTable') mfTable: NG2DataTable;
 
     minRowsOnPage = 0;
 
     ngOnChanges(changes: any): any {
         if (changes.rowsOnPageSet) {
-            this.minRowsOnPage = _.min(this.rowsOnPageSet)
+            this.minRowsOnPage = _.min(this.rowsOnPageSet);
         }
     }
 }

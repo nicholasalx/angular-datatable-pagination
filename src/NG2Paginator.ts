@@ -1,19 +1,19 @@
-import {Component, Input, SimpleChange, OnChanges, Optional} from "@angular/core";
-import {NG2DataTable, PageEvent} from "./NG2DataTable";
+import {Component, Input, SimpleChange, OnChanges, Optional} from '@angular/core';
+import {NG2DataTable, PageEvent} from './NG2DataTable';
 
 @Component({
-    selector: "mfPaginator",
+    selector: 'mfPaginator',
     template: `<ng-content></ng-content>`
 })
 export class NG2Paginator implements OnChanges {
 
-    @Input("mfTable") inputMfTable: NG2DataTable;
+    @Input('mfTable') inputMfTable: NG2DataTable;
 
     private mfTable: NG2DataTable;
 
     public activePage: number;
     public rowsOnPage: number;
-    public dataLength: number = 0;
+    public dataLength = 0;
     public lastPage: number;
 
     public constructor(@Optional() private injectMfTable: NG2DataTable) {
@@ -33,10 +33,10 @@ export class NG2Paginator implements OnChanges {
         this.mfTable.setPage(this.activePage, rowsOnPage);
     }
 
-    private onPageChangeSubscriber = (event: PageEvent)=> {
+    private onPageChangeSubscriber = (event: PageEvent) => {
         this.activePage = event.activePage;
         this.rowsOnPage = event.rowsOnPage;
         this.dataLength = event.dataLength;
         this.lastPage = Math.ceil(this.dataLength / this.rowsOnPage);
-    };
+    }
 }

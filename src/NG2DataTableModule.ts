@@ -1,10 +1,10 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import {NG2DataTable} from "./NG2DataTable";
-import {NG2DefaultSorter} from "./NG2DefaultSorter";
-import {NG2Paginator} from "./NG2Paginator";
-import {NG2BootstrapPaginator} from "./NG2BootstrapPaginator";
+import {NG2DataTable} from './NG2DataTable';
+import {NG2DefaultSorter} from './NG2DefaultSorter';
+import {NG2Paginator} from './NG2Paginator';
+import {NG2BootstrapPaginator} from './NG2BootstrapPaginator';
 
 @NgModule({
     imports: [

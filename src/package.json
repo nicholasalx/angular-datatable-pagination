@@ -1,0 +1,36 @@
+{
+  "name": "angular-datatable-pagination",
+  "description": "Datatable component for Angular2 framework",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/repo"
+  },
+  "author": {
+    "name": "Gweltaz GESTIN",
+    "email": "gestin.gweltaz@gmail.com"
+  },
+  "keywords": [
+    "angular",
+    "angularjs",
+    "angular2",
+    "ng",
+    "ng2",
+    "table",
+    "pagination",
+    "sort",
+    "sorting"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/username/repo/issues"
+  },
+  "module": "angular-datatable-pagination.js",
+  "typings": "angular-datatable-pagination.d.ts",
+  "peerDependencies": {
+    "@angular/common": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "@angular/platform-browser": "^4.0.0",
+    "lodash": "^4.17.4"
+  }
+}

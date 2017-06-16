@@ -1,5 +1,5 @@
 import {SimpleChange, Component} from '@angular/core';
-import {NG2DataTable, PageEvent, SortEvent} from './NG2DataTable';
+import {AngularDatatableDirective, PageEvent, SortEvent} from './AngularDatatable';
 import {TestBed, ComponentFixture} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
 import * as _ from 'lodash';
@@ -11,15 +11,16 @@ class TestComponent {
 }
 
 describe('DataTable directive tests', () => {
-    let datatable: NG2DataTable;
+    let datatable: AngularDatatableDirective;
     let fixture: ComponentFixture<TestComponent>;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [NG2DataTable, TestComponent]
+            declarations: [AngularDatatableDirective, TestComponent]
         });
         fixture = TestBed.createComponent(TestComponent);
-        datatable = fixture.debugElement.query(By.directive(NG2DataTable)).injector.get(NG2DataTable) as NG2DataTable;
+        datatable = fixture.debugElement.query(By.directive(AngularDatatableDirective))
+                .injector.get(AngularDatatableDirective) as AngularDatatableDirective;
         datatable.isServerPaginationage = false;
         datatable.inputData = [
             {id: 3, name: 'banana'},
@@ -138,7 +139,7 @@ describe('DataTable directive tests', () => {
                 {id: 3, name: 'banana'},
                 {id: 4, name: 'Ananas'},
                 {id: 5, name: 'Ðrone'}
-            ])
+            ]);
         });
 
         it('should fire onSortChange event after sorting input value changed', (done) => {
@@ -252,7 +253,7 @@ describe('DataTable directive tests', () => {
                 {id: 1, name: 'Duck'},
                 {id: 5, name: 'Ðrone'},
                 {id: 2, name: 'ącki'}
-            ])
+            ]);
         });
 
         it('should sort data descending by id', () => {
@@ -264,7 +265,7 @@ describe('DataTable directive tests', () => {
                 {id: 3, name: 'banana'},
                 {id: 2, name: 'ącki'},
                 {id: 1, name: 'Duck'}
-            ])
+            ]);
         });
 
         it('should sort data by two values', () => {

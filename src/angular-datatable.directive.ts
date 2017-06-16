@@ -21,10 +21,10 @@ export interface DataEvent {
 }
 
 @Directive({
-    selector: 'table[mfData]',
-    exportAs: 'mfDataTable'
+    selector: 'table[angularDatatable]',
+    exportAs: 'angularDatatable'
 })
-export class NG2DataTable implements OnChanges, DoCheck {
+export class AngularDatatableDirective implements OnChanges, DoCheck {
 
     private diff: IterableDiffer<any>;
     @Input('mfData') public inputData: any[] = [];
@@ -71,21 +71,23 @@ export class NG2DataTable implements OnChanges, DoCheck {
 
     public setPage(activePage: number, rowsOnPage: number): void {
         if (this.rowsOnPage !== rowsOnPage || this.activePage !== activePage) {
-            this.activePage = this.activePage !== activePage ? activePage : this.calculateNewActivePage(this.rowsOnPage, rowsOnPage);
+            this.activePage = this.activePage !== activePage ? activePage :
+                    this.calculateNewActivePage(this.rowsOnPage, rowsOnPage);
             this.rowsOnPage = rowsOnPage;
             this.mustRecalculateData = true;
-            if (this.isServerPaginationage)
+            if (this.isServerPaginationage) {
                 this.onServerPageChange.emit({
                     activePage: this.activePage,
                     rowsOnPage: this.rowsOnPage,
                     dataLength: this.amountOfRows
                 });
-            else
+            } else {
                 this.onPageChange.emit({
                     activePage: this.activePage,
                     rowsOnPage: this.rowsOnPage,
                     dataLength: this.inputData ? this.inputData.length : 0
                 });
+            }
         }
     }
 
@@ -105,8 +107,7 @@ export class NG2DataTable implements OnChanges, DoCheck {
                 rowsOnPage: this.rowsOnPage,
                 dataLength: this.amountOfRows
             });
-        }
-        else {
+        } else {
             this.onPageChange.emit({
                 activePage: this.activePage,
                 rowsOnPage: this.rowsOnPage,
@@ -124,7 +125,8 @@ export class NG2DataTable implements OnChanges, DoCheck {
 
         if (changes['sortBy'] || changes['sortOrder']) {
             if (!_.includes(['asc', 'desc'], this.sortOrder)) {
-                console.warn('angular2-serverpagination-datatable: value for input mfSortOrder must be one of [\'asc\', \'desc\'], but is:', this.sortOrder);
+                console.warn('angular2-serverpagination-datatable: value for input' +
+                        ' mfSortOrder must be one of [\'asc\', \'desc\'], but is:', this.sortOrder);
                 this.sortOrder = 'asc';
             }
             if (this.sortBy) {

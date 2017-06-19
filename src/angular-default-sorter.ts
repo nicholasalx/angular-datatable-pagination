@@ -16,11 +16,11 @@ export class AngularDefaultSorterComponent implements OnInit {
     isSortedByMeAsc = false;
     isSortedByMeDesc = false;
 
-    public constructor(private mfTable: AngularDatatableDirective) {
+    public constructor(private angularDatatableDirective: AngularDatatableDirective) {
     }
 
     public ngOnInit(): void {
-        this.mfTable.onSortChange.subscribe((event: SortEvent) => {
+        this.angularDatatableDirective.onSortChange.subscribe((event: SortEvent) => {
             this.isSortedByMeAsc = (event.sortBy === this.sortBy && event.sortOrder === 'asc');
             this.isSortedByMeDesc = (event.sortBy === this.sortBy && event.sortOrder === 'desc');
         });
@@ -28,9 +28,9 @@ export class AngularDefaultSorterComponent implements OnInit {
 
     sort() {
         if (this.isSortedByMeAsc) {
-            this.mfTable.setSort(this.sortBy, 'desc');
+            this.angularDatatableDirective.setSort(this.sortBy, 'desc');
         } else {
-            this.mfTable.setSort(this.sortBy, 'asc');
+            this.angularDatatableDirective.setSort(this.sortBy, 'asc');
         }
     }
 }

@@ -1,9 +1,9 @@
 import {SimpleChange, Component} from '@angular/core';
-import {AngularDatatableDirective, PageEvent, SortEvent} from './angular-angularDatatable.directive';
 import {TestBed, ComponentFixture} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
 import {} from 'jasmine';
 import * as _ from 'lodash';
+import {AngularDatatableDirective, PageEvent, SortEvent} from './angular-datatable.directive';
 
 @Component({
     template: `<table [angularDatatableDirective]="[]"></table>`

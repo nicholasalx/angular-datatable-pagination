@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AngularDatatableDirective, SortEvent} from './AngularDataTable';
+import {AngularDatatableDirective, SortEvent} from './angular-datatable.directive';
 
 @Component({
     selector: 'angular-default-sorter',
@@ -11,7 +11,7 @@ import {AngularDatatableDirective, SortEvent} from './AngularDataTable';
         </a>`
 })
 export class AngularDefaultSorterComponent implements OnInit {
-    @Input('by') sortBy: string;
+    @Input('sortBy') sortBy: string;
 
     isSortedByMeAsc = false;
     isSortedByMeDesc = false;

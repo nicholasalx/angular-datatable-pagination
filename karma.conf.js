@@ -1,3 +1,7 @@
+/*global require, module, config */
+/*jslint node: true */
+"use strict";
+
 // Karma configuration
 // Generated on Fri Jun 16 2017 23:57:54 GMT+0200 (Paris, Madrid (heure d’été))
 
@@ -55,7 +59,7 @@ module.exports = function(config) {
 
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-        browsers: ['Chrome', 'PhantomJS'],
+        browsers: ['Chrome'],
 
 
         // Continuous Integration mode
@@ -65,5 +69,5 @@ module.exports = function(config) {
         // Concurrency level
         // how many browser should be started simultaneous
         concurrency: Infinity
-    })
-}
+    });
+};

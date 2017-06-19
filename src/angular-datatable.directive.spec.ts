@@ -1,17 +1,18 @@
 import {SimpleChange, Component} from '@angular/core';
-import {AngularDatatableDirective, PageEvent, SortEvent} from './AngularDatatable';
+import {AngularDatatableDirective, PageEvent, SortEvent} from './angular-angularDatatable.directive';
 import {TestBed, ComponentFixture} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
+import {} from 'jasmine';
 import * as _ from 'lodash';
 
 @Component({
-    template: `<table [mfData]="[]"></table>`
+    template: `<table [angularDatatableDirective]="[]"></table>`
 })
 class TestComponent {
 }
 
 describe('DataTable directive tests', () => {
-    let datatable: AngularDatatableDirective;
+    let angularDatatable: AngularDatatableDirective;
     let fixture: ComponentFixture<TestComponent>;
 
     beforeEach(() => {
@@ -19,121 +20,119 @@ describe('DataTable directive tests', () => {
             declarations: [AngularDatatableDirective, TestComponent]
         });
         fixture = TestBed.createComponent(TestComponent);
-        datatable = fixture.debugElement.query(By.directive(AngularDatatableDirective))
+        angularDatatable = fixture.debugElement.query(By.directive(AngularDatatableDirective))
                 .injector.get(AngularDatatableDirective) as AngularDatatableDirective;
-        datatable.isServerPaginationage = false;
-        datatable.inputData = [
+        angularDatatable.isServerPaginationage = false;
+        angularDatatable.inputData = [
             {id: 3, name: 'banana'},
             {id: 1, name: 'Duck'},
             {id: 2, name: 'ącki'},
             {id: 5, name: 'Ðrone'},
             {id: 4, name: 'Ananas'}
         ];
-        datatable.ngOnChanges({inputData: new SimpleChange(null, datatable.inputData, true)});
+        angularDatatable.ngOnChanges({inputData: new SimpleChange(null, angularDatatable.inputData, true)});
     });
 
     describe('initializing', () => {
 
         it('data should be empty array if inputData is undefined or null', () => {
-            datatable.ngOnChanges({inputData: new SimpleChange(null, null, true)});
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual([]);
+            angularDatatable.ngOnChanges({inputData: new SimpleChange(null, null, true)});
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual([]);
         });
 
         it('data should be equal to inputData', () => {
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual(datatable.inputData);
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual(angularDatatable.inputData);
         });
 
         it('data should be 2 first items', () => {
-            datatable.rowsOnPage = 2;
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual([{id: 3, name: 'banana'}, {id: 1, name: 'Duck'}]);
+            angularDatatable.rowsOnPage = 2;
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual([{id: 3, name: 'banana'}, {id: 1, name: 'Duck'}]);
         });
 
         it('data should be 3. and 4. items', () => {
-            datatable.rowsOnPage = 2;
-            datatable.activePage = 2;
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual([{id: 2, name: 'ącki'}, {id: 5, name: 'Ðrone'}]);
+            angularDatatable.rowsOnPage = 2;
+            angularDatatable.activePage = 2;
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual([{id: 2, name: 'ącki'}, {id: 5, name: 'Ðrone'}]);
         });
 
         it('shouldn\'t recalculate data when no changes', () => {
-            datatable.ngDoCheck();
-            const data = datatable.data;
-            datatable.ngOnChanges({});
-            datatable.ngDoCheck();
-            expect(datatable.data).toBe(data);
+            angularDatatable.ngDoCheck();
+            const data = angularDatatable.data;
+            angularDatatable.ngOnChanges({});
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toBe(data);
         });
     });
 
     describe('pagination', () => {
 
         beforeEach(() => {
-            datatable.isServerPaginationage = false;
-            datatable.rowsOnPage = 2;
-            datatable.ngDoCheck();
+            angularDatatable.isServerPaginationage = false;
+            angularDatatable.rowsOnPage = 2;
+            angularDatatable.ngDoCheck();
         });
 
         it('should return current page settings', () => {
-            expect(datatable.getPage()).toEqual({activePage: 1, rowsOnPage: 2, dataLength: 5});
+            expect(angularDatatable.getPage()).toEqual({activePage: 1, rowsOnPage: 2, dataLength: 5});
         });
 
         it('data should be 3. and 4. items when page change', () => {
-            datatable.setPage(2, 2);
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual([{id: 2, name: 'ącki'}, {id: 5, name: 'Ðrone'}]);
+            angularDatatable.setPage(2, 2);
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual([{id: 2, name: 'ącki'}, {id: 5, name: 'Ðrone'}]);
         });
 
         it('data should be three first items when page change', () => {
-            datatable.setPage(1, 3);
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual([{id: 3, name: 'banana'}, {id: 1, name: 'Duck'}, {id: 2, name: 'ącki'}]);
+            angularDatatable.setPage(1, 3);
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual([{id: 3, name: 'banana'}, {id: 1, name: 'Duck'}, {id: 2, name: 'ącki'}]);
         });
 
         it('data should be two last items when page change', () => {
-            datatable.setPage(2, 3);
-            datatable.setPage(2, 3);
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual([{id: 5, name: 'Ðrone'}, {id: 4, name: 'Ananas'}]);
+            angularDatatable.setPage(2, 3);
+            angularDatatable.setPage(2, 3);
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual([{id: 5, name: 'Ðrone'}, {id: 4, name: 'Ananas'}]);
         });
 
         it('should change rowsOnPage when mfRowsOnPage changed', (done) => {
-            datatable.rowsOnPage = 2;
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual([{id: 3, name: 'banana'}, {id: 1, name: 'Duck'}]);
+            angularDatatable.rowsOnPage = 2;
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual([{id: 3, name: 'banana'}, {id: 1, name: 'Duck'}]);
 
-            datatable.onPageChange.subscribe((pageOptions: PageEvent) => {
+            angularDatatable.onPageChange.subscribe((pageOptions: PageEvent) => {
                 expect(pageOptions.rowsOnPage).toEqual(3);
                 done();
             });
 
-            datatable.rowsOnPage = 3;
-            datatable.ngOnChanges({rowsOnPage: new SimpleChange(2, 3, true)});
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual([{id: 3, name: 'banana'}, {id: 1, name: 'Duck'}, {id: 2, name: 'ącki'}]);
-
-
+            angularDatatable.rowsOnPage = 3;
+            angularDatatable.ngOnChanges({rowsOnPage: new SimpleChange(2, 3, true)});
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual([{id: 3, name: 'banana'}, {id: 1, name: 'Duck'}, {id: 2, name: 'ącki'}]);
         });
     });
 
     describe('sorting', () => {
 
         it('id should return current sort setting', () => {
-            datatable.setSort('id', 'desc');
-            expect(datatable.getSort()).toEqual({sortBy: 'id', sortOrder: 'desc'});
+            angularDatatable.setSort('id', 'desc');
+            expect(angularDatatable.getSort()).toEqual({sortBy: 'id', sortOrder: 'desc'});
         });
 
         it('should sort data after sorting input value changed', () => {
-            datatable.ngDoCheck();
-            datatable.sortBy = 'id';
-            datatable.sortOrder = 'asc';
-            datatable.ngOnChanges({
-                sortBy: new SimpleChange(null, datatable.sortBy, true ),
-                sortOrder: new SimpleChange(null, datatable.sortOrder, true)
+            angularDatatable.ngDoCheck();
+            angularDatatable.sortBy = 'id';
+            angularDatatable.sortOrder = 'asc';
+            angularDatatable.ngOnChanges({
+                sortBy: new SimpleChange(null, angularDatatable.sortBy, true ),
+                sortOrder: new SimpleChange(null, angularDatatable.sortOrder, true)
             });
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual([
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual([
                 {id: 1, name: 'Duck'},
                 {id: 2, name: 'ącki'},
                 {id: 3, name: 'banana'},
@@ -143,53 +142,53 @@ describe('DataTable directive tests', () => {
         });
 
         it('should fire onSortChange event after sorting input value changed', (done) => {
-            datatable.onSortChange.subscribe((event: SortEvent) => {
+            angularDatatable.onSortChange.subscribe((event: SortEvent) => {
                 expect(event.sortBy).toEqual('id');
                 expect(event.sortOrder).toEqual('desc');
                 done();
             });
-            datatable.ngDoCheck();
-            datatable.sortBy = 'id';
-            datatable.sortOrder = 'desc';
-            datatable.ngOnChanges({
-                sortBy: new SimpleChange(null, datatable.sortBy, true),
-                sortOrder: new SimpleChange(null, datatable.sortOrder, true)
+            angularDatatable.ngDoCheck();
+            angularDatatable.sortBy = 'id';
+            angularDatatable.sortOrder = 'desc';
+            angularDatatable.ngOnChanges({
+                sortBy: new SimpleChange(null, angularDatatable.sortBy, true),
+                sortOrder: new SimpleChange(null, angularDatatable.sortOrder, true)
             });
-            datatable.ngDoCheck();
+            angularDatatable.ngDoCheck();
 
         });
 
         it('should set sortOrder to \'asc\' if not provided', (done) => {
-            datatable.onSortChange.subscribe((event: SortEvent) => {
+            angularDatatable.onSortChange.subscribe((event: SortEvent) => {
                 expect(event.sortBy).toEqual('id');
                 expect(event.sortOrder).toEqual('asc');
                 done();
             });
-            datatable.ngDoCheck();
-            datatable.sortBy = 'id';
-            datatable.ngOnChanges({
-                sortBy: new SimpleChange(null, datatable.sortBy, true)
+            angularDatatable.ngDoCheck();
+            angularDatatable.sortBy = 'id';
+            angularDatatable.ngOnChanges({
+                sortBy: new SimpleChange(null, angularDatatable.sortBy, true)
             });
-            datatable.ngDoCheck();
-            expect(datatable.sortOrder).toEqual('asc');
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.sortOrder).toEqual('asc');
         });
 
         it('should set sortOrder to \'asc\' if provided something else than \'asc\' or \'desc\'', (done) => {
-            datatable.onSortChange.subscribe((event: SortEvent) => {
+            angularDatatable.onSortChange.subscribe((event: SortEvent) => {
                 expect(event.sortBy).toEqual('id');
                 expect(event.sortOrder).toEqual('asc');
                 done();
             });
-            datatable.ngDoCheck();
-            datatable.sortBy = 'id';
-            datatable.sortOrder = 'bulb';
-            datatable.ngOnChanges({
-                sortBy: new SimpleChange(null, datatable.sortBy, true),
-                sortOrder: new SimpleChange(null, datatable.sortOrder, true)
+            angularDatatable.ngDoCheck();
+            angularDatatable.sortBy = 'id';
+            angularDatatable.sortOrder = 'bulb';
+            angularDatatable.ngOnChanges({
+                sortBy: new SimpleChange(null, angularDatatable.sortBy, true),
+                sortOrder: new SimpleChange(null, angularDatatable.sortOrder, true)
             });
-            datatable.ngDoCheck();
-            expect(datatable.sortOrder).toEqual('asc');
-            expect(datatable.data).toEqual([
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.sortOrder).toEqual('asc');
+            expect(angularDatatable.data).toEqual([
                 {id: 1, name: 'Duck'},
                 {id: 2, name: 'ącki'},
                 {id: 3, name: 'banana'},
@@ -200,54 +199,54 @@ describe('DataTable directive tests', () => {
 
         it('shouldn\'t change order when only order provided', (done) => {
             done();
-            datatable.onSortChange.subscribe(() => {
+            angularDatatable.onSortChange.subscribe(() => {
                 done.fail('OnSortChange shouldn\'t been fired');
             });
-            datatable.ngDoCheck();
-            datatable.sortOrder = 'desc';
-            datatable.ngOnChanges({sortOrder: new SimpleChange(null, datatable.sortOrder, true)});
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual(datatable.inputData);
+            angularDatatable.ngDoCheck();
+            angularDatatable.sortOrder = 'desc';
+            angularDatatable.ngOnChanges({sortOrder: new SimpleChange(null, angularDatatable.sortOrder, true)});
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual(angularDatatable.inputData);
         });
 
         it('should call output event when sorting changed', (done) => {
-            datatable.ngDoCheck();
-            datatable.sortByChange.switchMap((sortBy: string) => {
+            angularDatatable.ngDoCheck();
+            angularDatatable.sortByChange.switchMap((sortBy: string) => {
                 expect(sortBy).toEqual('id');
-                return datatable.sortOrderChange;
+                return angularDatatable.sortOrderChange;
             }).subscribe((sortOrder: string) => {
                 expect(sortOrder).toEqual('desc');
                 done();
             });
 
-            datatable.setSort('id', 'desc');
+            angularDatatable.setSort('id', 'desc');
         });
 
         it('shouldn\'t call output event when sortOrder fixed', (done) => {
-            datatable.ngDoCheck();
-            datatable.sortOrderChange.subscribe(() => {
+            angularDatatable.ngDoCheck();
+            angularDatatable.sortOrderChange.subscribe(() => {
                 done.fail('Shouldn\'t call sortOrderChange');
             });
             done();
-            datatable.sortOrder = 'bulb';
-            datatable.ngOnChanges({sortOrder: new SimpleChange(null, datatable.sortOrder, true)});
-            datatable.ngDoCheck();
+            angularDatatable.sortOrder = 'bulb';
+            angularDatatable.ngOnChanges({sortOrder: new SimpleChange(null, angularDatatable.sortOrder, true)});
+            angularDatatable.ngDoCheck();
         });
         // Wywołanie outputa gdy zmiana z innej strony
 
         it('shouldn\'t refresh data when set page with same settings', () => {
-            datatable.setSort('name', 'asc');
-            datatable.ngDoCheck();
-            const data = datatable.data;
-            datatable.setSort('name', 'asc');
-            datatable.ngDoCheck();
-            expect(datatable.data).toBe(data);
+            angularDatatable.setSort('name', 'asc');
+            angularDatatable.ngDoCheck();
+            const data = angularDatatable.data;
+            angularDatatable.setSort('name', 'asc');
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toBe(data);
         });
 
         it('should sort data ascending by name', () => {
-            datatable.setSort('name', 'asc');
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual([
+            angularDatatable.setSort('name', 'asc');
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual([
                 {id: 4, name: 'Ananas'},
                 {id: 3, name: 'banana'},
                 {id: 1, name: 'Duck'},
@@ -257,9 +256,9 @@ describe('DataTable directive tests', () => {
         });
 
         it('should sort data descending by id', () => {
-            datatable.setSort('id', 'desc');
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual([
+            angularDatatable.setSort('id', 'desc');
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual([
                 {id: 5, name: 'Ðrone'},
                 {id: 4, name: 'Ananas'},
                 {id: 3, name: 'banana'},
@@ -276,11 +275,11 @@ describe('DataTable directive tests', () => {
                 {name: 'Claire', age: 7},
                 {name: 'Anna', age: 12}
             ];
-            datatable.ngOnChanges({inputData: new SimpleChange(datatable.inputData, newData, true)});
-            datatable.setSort(['name', 'age'], 'asc');
-            datatable.ngDoCheck();
+            angularDatatable.ngOnChanges({inputData: new SimpleChange(angularDatatable.inputData, newData, true)});
+            angularDatatable.setSort(['name', 'age'], 'asc');
+            angularDatatable.ngDoCheck();
 
-            expect(datatable.data).toEqual([
+            expect(angularDatatable.data).toEqual([
                 {name: 'Anna', age: 12},
                 {name: 'Anna', age: 34},
                 {name: 'Claire', age: 7},
@@ -298,11 +297,11 @@ describe('DataTable directive tests', () => {
                 {name: 'Claire', city: {zip: '11111'}},
                 {name: 'Anna', city: {zip: '21111'}}
             ];
-            datatable.ngOnChanges({inputData: new SimpleChange(datatable.inputData, newData, true)});
-            datatable.setSort('city.zip', 'asc');
-            datatable.ngDoCheck();
+            angularDatatable.ngOnChanges({inputData: new SimpleChange(angularDatatable.inputData, newData, true)});
+            angularDatatable.setSort('city.zip', 'asc');
+            angularDatatable.ngDoCheck();
 
-            expect(datatable.data).toEqual([
+            expect(angularDatatable.data).toEqual([
                 {name: 'Claire', city: {zip: '11111'}},
                 {name: 'Anna', city: {zip: '21111'}},
                 {name: 'Claire', city: {zip: '41111'}},
@@ -316,140 +315,140 @@ describe('DataTable directive tests', () => {
     describe('data change', () => {
         it('should refresh data when inputData change', () => {
             const newData = [{id: 5, name: 'Ðrone'}, {id: 4, name: 'Ananas'}];
-            datatable.ngOnChanges({inputData: new SimpleChange(datatable.inputData, newData, true)});
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual([{id: 5, name: 'Ðrone'}, {id: 4, name: 'Ananas'}]);
+            angularDatatable.ngOnChanges({inputData: new SimpleChange(angularDatatable.inputData, newData, true)});
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual([{id: 5, name: 'Ðrone'}, {id: 4, name: 'Ananas'}]);
         });
 
         it('should refresh data when rows removed from inputData', () => {
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual(datatable.inputData);
-            datatable.inputData.pop();
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual(datatable.inputData);
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual(angularDatatable.inputData);
+            angularDatatable.inputData.pop();
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual(angularDatatable.inputData);
         });
 
         it('should refresh data when rows added to inputData', () => {
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual(datatable.inputData);
-            datatable.inputData.push({id: 6, name: 'Furby'});
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual(datatable.inputData);
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual(angularDatatable.inputData);
+            angularDatatable.inputData.push({id: 6, name: 'Furby'});
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual(angularDatatable.inputData);
         });
 
         it('should fire onPageChange event after inputData change', (done) => {
-            datatable.setPage(2, 2);
-            datatable.ngDoCheck();
+            angularDatatable.setPage(2, 2);
+            angularDatatable.ngDoCheck();
 
-            datatable.onPageChange.subscribe((opt: PageEvent) => {
+            angularDatatable.onPageChange.subscribe((opt: PageEvent) => {
                 expect(opt.activePage).toEqual(1);
                 expect(opt.dataLength).toEqual(2);
                 expect(opt.rowsOnPage).toEqual(2);
                 done();
             });
             const newData = [{id: 5, name: 'Ðrone'}, {id: 4, name: 'Ananas'}];
-            datatable.ngOnChanges({inputData: new SimpleChange(datatable.inputData, newData, true)});
-            datatable.ngDoCheck();
+            angularDatatable.ngOnChanges({inputData: new SimpleChange(angularDatatable.inputData, newData, true)});
+            angularDatatable.ngDoCheck();
         });
 
         it('should fire onPageChange event after rows added', (done) => {
-            datatable.setPage(2, 2);
-            datatable.ngDoCheck();
+            angularDatatable.setPage(2, 2);
+            angularDatatable.ngDoCheck();
 
-            datatable.onPageChange.subscribe((opt: PageEvent) => {
+            angularDatatable.onPageChange.subscribe((opt: PageEvent) => {
                 expect(opt.activePage).toEqual(2);
                 expect(opt.dataLength).toEqual(6);
                 expect(opt.rowsOnPage).toEqual(2);
                 done();
             });
-            datatable.inputData.push({id: 6, name: 'Furby'});
-            datatable.ngDoCheck();
+            angularDatatable.inputData.push({id: 6, name: 'Furby'});
+            angularDatatable.ngDoCheck();
         });
 
         it('should fire onPageChange event after rows removed', (done) => {
-            datatable.setPage(2, 2);
-            datatable.ngDoCheck();
+            angularDatatable.setPage(2, 2);
+            angularDatatable.ngDoCheck();
 
-            datatable.onPageChange.subscribe((opt: PageEvent) => {
+            angularDatatable.onPageChange.subscribe((opt: PageEvent) => {
                 expect(opt.activePage).toEqual(1);
                 expect(opt.dataLength).toEqual(2);
                 expect(opt.rowsOnPage).toEqual(2);
                 done();
             });
-            _.times(3, () => datatable.inputData.pop());
-            datatable.ngDoCheck();
+            _.times(3, () => angularDatatable.inputData.pop());
+            angularDatatable.ngDoCheck();
         });
 
         it('should change page when no data on current page after changed inputData', () => {
-            datatable.setPage(2, 2);
-            datatable.ngDoCheck();
+            angularDatatable.setPage(2, 2);
+            angularDatatable.ngDoCheck();
 
             const newData = [{id: 5, name: 'Ðrone'}, {id: 4, name: 'Ananas'}];
-            datatable.ngOnChanges({inputData: new SimpleChange(datatable.inputData, newData, true)});
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual(newData);
+            angularDatatable.ngOnChanges({inputData: new SimpleChange(angularDatatable.inputData, newData, true)});
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual(newData);
         });
 
         it('should change page when no data on current page after rows removed', () => {
-            datatable.setPage(2, 2);
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual([{id: 2, name: 'ącki'}, {id: 5, name: 'Ðrone'}]);
+            angularDatatable.setPage(2, 2);
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual([{id: 2, name: 'ącki'}, {id: 5, name: 'Ðrone'}]);
 
-            datatable.inputData.pop();
-            datatable.inputData.pop();
-            datatable.inputData.pop();
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual([{id: 3, name: 'banana'}, {id: 1, name: 'Duck'}]);
+            angularDatatable.inputData.pop();
+            angularDatatable.inputData.pop();
+            angularDatatable.inputData.pop();
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual([{id: 3, name: 'banana'}, {id: 1, name: 'Duck'}]);
         });
 
         it('shouldn\'t change page when can display data after data changed', () => {
-            datatable.setPage(2, 1);
-            datatable.ngDoCheck();
+            angularDatatable.setPage(2, 1);
+            angularDatatable.ngDoCheck();
 
             const newData = [{id: 5, name: 'Ðrone'}, {id: 1, name: 'Duck'}, {id: 4, name: 'Ananas'}];
-            datatable.ngOnChanges({inputData: new SimpleChange(datatable.inputData, newData, true)});
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual([{id: 1, name: 'Duck'}]);
+            angularDatatable.ngOnChanges({inputData: new SimpleChange(angularDatatable.inputData, newData, true)});
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual([{id: 1, name: 'Duck'}]);
         });
 
         it('shouldn\'t change page when can display data after rows removed', () => {
-            datatable.setPage(2, 1);
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual([{id: 1, name: 'Duck'}]);
+            angularDatatable.setPage(2, 1);
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual([{id: 1, name: 'Duck'}]);
 
-            datatable.inputData.pop();
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual([{id: 1, name: 'Duck'}]);
+            angularDatatable.inputData.pop();
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual([{id: 1, name: 'Duck'}]);
         });
 
         it('shouldn\'t change page when can display data after rows added', () => {
-            datatable.setPage(2, 1);
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual([{id: 1, name: 'Duck'}]);
+            angularDatatable.setPage(2, 1);
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual([{id: 1, name: 'Duck'}]);
 
-            datatable.inputData.push({id: 6, name: 'Furby'});
-            datatable.ngDoCheck();
-            expect(datatable.data).toEqual([{id: 1, name: 'Duck'}]);
+            angularDatatable.inputData.push({id: 6, name: 'Furby'});
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.data).toEqual([{id: 1, name: 'Duck'}]);
         });
 
         it('shouldn\'t change page to 0 when data is empty', () => {
-            datatable.setPage(2, 1);
-            datatable.ngDoCheck();
+            angularDatatable.setPage(2, 1);
+            angularDatatable.ngDoCheck();
 
             const newData = [];
-            datatable.ngOnChanges({inputData: new SimpleChange(datatable.inputData, newData, true)});
-            datatable.ngDoCheck();
-            expect(datatable.activePage).toEqual(1);
+            angularDatatable.ngOnChanges({inputData: new SimpleChange(angularDatatable.inputData, newData, true)});
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.activePage).toEqual(1);
         });
 
         it('shouldn\'t change page to 0 when data is empty after removed rows', () => {
-            datatable.setPage(2, 1);
-            datatable.ngDoCheck();
+            angularDatatable.setPage(2, 1);
+            angularDatatable.ngDoCheck();
 
-            _.times(5, () => datatable.inputData.pop());
-            datatable.ngDoCheck();
-            expect(datatable.inputData.length).toEqual(0);
-            expect(datatable.activePage).toEqual(1);
+            _.times(5, () => angularDatatable.inputData.pop());
+            angularDatatable.ngDoCheck();
+            expect(angularDatatable.inputData.length).toEqual(0);
+            expect(angularDatatable.activePage).toEqual(1);
         });
     });
 });

@@ -27,17 +27,17 @@ export interface DataEvent {
 export class AngularDatatableDirective implements OnChanges, DoCheck {
 
     private diff: IterableDiffer<any>;
-    @Input('mfData') public inputData: any[] = [];
+    @Input('inputData') public inputData: any[] = [];
 
-    @Input('mfSortBy') public sortBy: string | string[] = '';
-    @Input('mfSortOrder') public sortOrder = 'asc';
-    @Output('mfSortByChange') public sortByChange = new EventEmitter<string | string[]>();
-    @Output('mfSortOrderChange') public sortOrderChange = new EventEmitter<string>();
-    @Output('mfOnPageChange') public onServerPageChange = new EventEmitter<PageEvent>();
-    @Input('mfRowsOnPage') public rowsOnPage = 1000;
-    @Input('mfActivePage') public activePage = 1;
-    @Input('mfAmountOfRows') public amountOfRows = 0;
-    @Input('mfIsServerPagination') public isServerPaginationage = true;
+    @Input('sortBy') public sortBy: string | string[] = '';
+    @Input('sortOrder') public sortOrder = 'asc';
+    @Output('sortByChange') public sortByChange = new EventEmitter<string | string[]>();
+    @Output('sortOrderChange') public sortOrderChange = new EventEmitter<string>();
+    @Output('onServerPageChange') public onServerPageChange = new EventEmitter<PageEvent>();
+    @Input('rowsOnPage') public rowsOnPage = 1000;
+    @Input('activePage') public activePage = 1;
+    @Input('amountOfRows') public amountOfRows = 0;
+    @Input('isServerPaginationage') public isServerPaginationage = true;
 
     private mustRecalculateData = false;
 
@@ -126,7 +126,7 @@ export class AngularDatatableDirective implements OnChanges, DoCheck {
         if (changes['sortBy'] || changes['sortOrder']) {
             if (!_.includes(['asc', 'desc'], this.sortOrder)) {
                 console.warn('angular2-serverpagination-datatable: value for input' +
-                        ' mfSortOrder must be one of [\'asc\', \'desc\'], but is:', this.sortOrder);
+                        ' sortOrder must be one of [\'asc\', \'desc\'], but is:', this.sortOrder);
                 this.sortOrder = 'asc';
             }
             if (this.sortBy) {

@@ -1,5 +1,5 @@
 import {Component, Input, SimpleChange, OnChanges, Optional} from '@angular/core';
-import {AngularDatatableDirective, PageEvent} from './AngularDatatable';
+import {AngularDatatableDirective, PageEvent} from './angular-datatable.directive';
 
 @Component({
     selector: 'angular-paginator',
@@ -7,30 +7,30 @@ import {AngularDatatableDirective, PageEvent} from './AngularDatatable';
 })
 export class AngularPaginatorComponent implements OnChanges {
 
-    @Input('mfTable') inputMfTable: AngularDatatableDirective;
+    @Input('angularDatatableDirective') angularDatatableDirective: AngularDatatableDirective;
 
-    private mfTable: AngularDatatableDirective;
+    private _angularDatatableDirective: AngularDatatableDirective;
 
     public activePage: number;
     public rowsOnPage: number;
     public dataLength = 0;
     public lastPage: number;
 
-    public constructor(@Optional() private injectMfTable: AngularDatatableDirective) {
+    public constructor(@Optional() private injectedAngularDatatableDirective: AngularDatatableDirective) {
     }
 
     public ngOnChanges(changes: {[key: string]: SimpleChange}): any {
-        this.mfTable = this.inputMfTable || this.injectMfTable;
-        this.onPageChangeSubscriber(this.mfTable.getPage());
-        this.mfTable.onPageChange.subscribe(this.onPageChangeSubscriber);
+        this._angularDatatableDirective = this.injectedAngularDatatableDirective || this.injectedAngularDatatableDirective;
+        this.onPageChangeSubscriber(this._angularDatatableDirective.getPage());
+        this._angularDatatableDirective.onPageChange.subscribe(this.onPageChangeSubscriber);
     }
 
     public setPage(pageNumber: number): void {
-        this.mfTable.setPage(pageNumber, this.rowsOnPage);
+        this._angularDatatableDirective.setPage(pageNumber, this.rowsOnPage);
     }
 
     public setRowsOnPage(rowsOnPage: number): void {
-        this.mfTable.setPage(this.activePage, rowsOnPage);
+        this._angularDatatableDirective.setPage(this.activePage, rowsOnPage);
     }
 
     private onPageChangeSubscriber = (event: PageEvent) => {

@@ -1,11 +1,11 @@
 import {Component, Input, OnChanges} from '@angular/core';
-import {AngularDatatableDirective} from './AngularDatatable';
+import {AngularDatatableDirective} from './angular-datatable.directive';
 import * as _ from 'lodash';
 
 @Component({
     selector: 'angular-bootstrap-paginator',
     template: `
-    <angular-paginator #p [mfTable]="mfTable">
+    <angular-paginator #p [angularDatatableDirective]="angularDatatableDirective">
         <ul class="pagination" *ngIf="p.dataLength > p.rowsOnPage">
             <li class="page-item" [class.disabled]="p.activePage <= 1" (click)="p.setPage(1)">
                 <a class="page-link" style="cursor: pointer">&laquo;</a>
@@ -51,7 +51,7 @@ import * as _ from 'lodash';
 })
 export class AngularBootstrapPaginatorComponent implements OnChanges {
     @Input('rowsOnPageSet') rowsOnPageSet = [];
-    @Input('mfTable') mfTable: AngularDatatableDirective;
+    @Input('angularDatatableDirective') angularDatatableDirective: AngularDatatableDirective;
 
     minRowsOnPage = 0;
 

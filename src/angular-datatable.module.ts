@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {AngularDatatableDirective} from './AngularDataTable';
-import {AngularDefaultSorterComponent} from './AngularDefaultSorter';
-import {AngularPaginatorComponent} from './AngularPaginator';
-import {AngularBootstrapPaginatorComponent} from './AngularBootstrapPaginator';
+import {AngularDatatableDirective} from './angular-datatable.directive';
+import {AngularDefaultSorterComponent} from './angular-default-sorter';
+import {AngularPaginatorComponent} from './angular-paginator.component';
+import {AngularBootstrapPaginatorComponent} from './angular-bootstrap-paginator.component';
 
 @NgModule({
     imports: [

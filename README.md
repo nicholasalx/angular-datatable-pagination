@@ -1,5 +1,6 @@
 # angular-datatable-pagination
 fork from [angular2-datatable-pagination](https://github.com/Ants24/angular2-datatable-pagination), server pagination and client pagination
+
 Generated with [generator-angular2-library](https://github.com/jvandemo/generator-angular2-library)
 
 [![Build Status](https://travis-ci.org/Lautre3091/angular-datatable-pagination.svg?branch=master)](https://travis-ci.org/Lautre3091/angular-datatable-pagination)
@@ -18,12 +19,12 @@ AppModule.ts
 ```typescript
 import {NgModule} from "@angular/core";
 ...
-import {NG2DataTableModule} from "angular2-datatable-pagination";
+import {AngularDatatableModule} from "angular-datatable-pagination";
 
 @NgModule({
     imports: [
         ...
-        NG2DataTableModule
+        AngularDatatableModule
     ],
     ...
 })
@@ -34,27 +35,27 @@ export class AppModule {
 
 server pagination
 ```html
-[mfIsServerPagination]="true"
+[issServerPagination]="true"
 ```
 UserComponent.html
 ```html
- <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage"
-                [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder" [mfActivePage]="activePage" (mfOnPageChange)="onPageChange($event)"
-                [mfIsServerPagination]="true" [(mfAmountOfRows)]="itemsTotal" (mfSortOrderChange)="onSortOrder($event)">
+ <table class="table table-striped" [inputData]="data | dataFilter : filterQuery" #table="angularDatatable" [rowsOnPage]="rowsOnPage"
+                [(sortBy)]="sortBy" [(sortOrder)]="sortOrder" [activePage]="activePage" (onPageChange)="onPageChange($event)"
+                [isServerPagination]="true" [(amountOfRows)]="itemsTotal" (sortOrderChange)="onSortOrder($event)">
                 <thead>
                 <tr>
                     <th style="width: 10%"></th>
                     <th style="width: 20%">
-                        <mfDefaultSorter by="name">Name</mfDefaultSorter>
+                        <mfDefaultSorter sortBy="name">Name</mfDefaultSorter>
                     </th>
                     <th style="width: 40%">
-                        <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                        <mfDefaultSorter sortBy="email">Email</mfDefaultSorter>
                     </th>
                     <th style="width: 10%">
-                        <mfDefaultSorter by="age">Age</mfDefaultSorter>
+                        <mfDefaultSorter sortBy="age">Age</mfDefaultSorter>
                     </th>
                     <th style="width: 20%">
-                        <mfDefaultSorter [by]="sortByWordLength">City</mfDefaultSorter>
+                        <mfDefaultSorter [sortBy]="sortByWordLength">City</mfDefaultSorter>
                     </th>
                 </tr>
                 </thead>
@@ -72,7 +73,7 @@ UserComponent.html
                 <tfoot>
                 <tr>
                     <td colspan="5">
-                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                        <angular-bootstrap-paginator [rowsOnPageSet]="[5,10,15]"></angular-bootstrap-paginator>
                     </td>
                 </tr>
                 </tfoot>

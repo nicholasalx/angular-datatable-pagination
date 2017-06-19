@@ -23,5 +23,8 @@
     "skipTemplateCodegen": true,
     "flatModuleOutFile": "angular-datatable-pagination.js",
     "flatModuleId": "angular-datatable-pagination"
-  }
+  },
+  "files": [
+    "./index.ts"
+  ]
 }
